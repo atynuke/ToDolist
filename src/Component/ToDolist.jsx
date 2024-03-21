@@ -1,46 +1,58 @@
-import { useState } from "react";
-
+import { Component, useState } from "react";
+import './ToDolist.css'
 
 
 export default function ToDolist() {
-    const [ToDo, setToDo] = useState("")
-    const [AddToDo, setAddToDo] = useState("");
-    const [EndToDo, setEndToDo] = useState("");
+    let [ToDo, setToDo] = useState([])
+    let [inputText, changeText] = useState([])
+   
 
-    const handleToDo = () => {
 
-        if (ToDo.trim()==="") 
-        return;  setToDo:{ ToDo, AddToDo};
-        setAddToDo:{""};
-    };
+    function AddToDo() {
 
+        // To show the Length
+        if (inputText.length > 0) {
+
+
+            let cc = [...ToDo, inputText]
+            setToDo(cc
+            );
+
+            // To Clear every Input that's written
+            changeText("");
+        }
+        console.log(ToDo);
+    }
+
+    // To Change Task
+    function nameChangeHandler(text) {
+        changeText(
+            text
+        )
+    }
+
+    // To Display the InputText
+    let components = [];
+
+    ToDo.forEach((value)=>{
+        components.push(<h1>{value}</h1>)
+    })
 
     return (
         <>
-            <form action="">
-                
+
             <div className="Container">
                 <h1>MY TODO LIST</h1>
+                <input type="text" value={inputText} onChange={() => nameChangeHandler(event.target.value)} placeholder="Enter a task" /> <br />
 
+                <button onClick={AddToDo} > Add Task</button>
 
-                <input type="text" defaultValue={AddToDo} onchangeAddToDo={() => setAddToDo} placeholder="Enter a task" /> <br />
-
-                <button onClick={AddToDo}> Add Task</button>
-                <button onClick={() => this.ToDo} type="button"> Remove Task</button>
-
-                <ul v>
-                    <li>ToDolist one</li>
-                    <li>ToDolist one</li>
-                    <li>ToDolist one</li>
-                    <li>ToDolist one</li>
-                    <li>ToDolist one</li>
-                </ul>
+                {components}
 
 
             </div>
- 
-            </form>       
-            
+
+
         </>
 
     );
